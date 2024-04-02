@@ -120,13 +120,14 @@
       $(`#${lightboxId}`).modal("toggle");
     },
     prevImage() {
+      console.log ('check prevImage')
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
         }
       });
-      let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
+      let activeTag = $(".tags-bar span.active").data("images-toggle");
       let imagesCollection = [];
       if (activeTag === "all") {
         $(".item-column").each(function() {
@@ -154,7 +155,7 @@
         }
       });
       next =
-        imagesCollection[index] ||
+        imagesCollection[index -1] ||
         imagesCollection[imagesCollection.length - 1];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
@@ -165,7 +166,7 @@
           activeImage = $(this);
         }
       });
-      let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
+      let activeTag = $(".tags-bar span.active").data("images-toggle");
       let imagesCollection = [];
       if (activeTag === "all") {
         $(".item-column").each(function() {
@@ -192,7 +193,7 @@
           index = i;
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
+      next = imagesCollection[index +1] || imagesCollection[0];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
@@ -220,7 +221,7 @@
     },
     showItemTags(gallery, position, tags) {
       var tagItems =
-        '<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>';
+        '<li class="nav-item"><span class="nav-link active"  data-images-toggle="all">Tous</span></li>';
       $.each(tags, function(index, value) {
         tagItems += `<li class="nav-item active">
                 <span class="nav-link"  data-images-toggle="${value}">${value}</span></li>`;
@@ -236,11 +237,11 @@
       }
     },
     filterByTag() {
-      if ($(this).hasClass("active-tag")) {
+      if ($(this).hasClass("active")) {
         return;
       }
-      $(".active-tag").removeClass("active active-tag");
-      $(this).addClass("active-tag");
+      $(".active").removeClass("active");
+      $(this).addClass("active");
 
       var tag = $(this).data("images-toggle");
 
