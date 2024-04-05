@@ -100,9 +100,16 @@ img{
 	line-height: 1.2;
 }
 
-/*#gallery {
-	/*	min-height: 100vh; 
-}*/
+.modal-body {
+	width: 498px;
+	height: 730px;
+}
+
+.lightboxImage.lightboxImage.img-fluid {
+	width: 100%; 
+  	height: 100%; 
+	object-fit: cover;
+}
 
 .title{
 	text-align: center;
